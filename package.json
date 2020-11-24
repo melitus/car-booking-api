@@ -1,0 +1,8 @@
+{
+  "name": "car-booking-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/melitus/car-booking-api.git",
+  "author": "melitus <asmelitus@gmail.com>",
+  "license": "MIT"
+}
