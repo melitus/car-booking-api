@@ -1,4 +1,4 @@
-import User from './index';
+import User from './user.model';
 import { generateAccessTokens, passwordMatchesFn, generatePasswordHashFn } from '../../../auth';
 
 const checkEmailExist = async (email) => {
@@ -6,7 +6,7 @@ const checkEmailExist = async (email) => {
   return user;
 };
 
-const register = async (inputData) => {
+const registerUser = async (inputData) => {
   const { email, password } = inputData;
   const hash = await generatePasswordHashFn(password);
   const newUser = await User.create({
@@ -17,7 +17,7 @@ const register = async (inputData) => {
   return accessToken;
 };
 
-const login = async (inputData) => {
+const loginUser = async (inputData) => {
   const { email, password } = inputData;
   const user = await User.findOne({ email }).exec();
   const accessToken = await generateAccessTokens(user);
@@ -26,4 +26,4 @@ const login = async (inputData) => {
   return accessToken;
 };
 
-export { login, register, checkEmailExist };
+export default { loginUser, registerUser, checkEmailExist };
