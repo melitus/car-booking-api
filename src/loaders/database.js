@@ -3,8 +3,9 @@ import Sequelize from 'sequelize';
 import dbConfig from '../config';
 
 import User from '../api/v1/user';
+import Car from '../api/v1/car';
 
-const models = [User];
+const models = [User, Car];
 
 class Database {
   constructor() {

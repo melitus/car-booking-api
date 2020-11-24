@@ -23,13 +23,13 @@ class Car extends Model {
       },
     );
 
-    this.tableName = 'User';
+    this.tableName = 'Car';
 
     return this;
   }
 
   static associate(models) {
-    this.hasMany(models.Car, { foreignKey: 'car_id', onDelete: 'CASCADE' });
+    this.belongsTo(models.User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
   }
 }
 
