@@ -2,7 +2,7 @@
 import expressLoader from './express';
 import databaseLoader from './database';
 
-export const appInitLoader = (app) => {
-//   databaseLoader();
+export const appInitLoader = async (app) => {
+  await databaseLoader();
   expressLoader(app);
 };

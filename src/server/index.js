@@ -7,8 +7,8 @@ import config from '../config';
 const app = express();
 const server = http.createServer(app);
 
-export function startServer() {
-  appInitLoader(app);
+export async function startServer() {
+  await appInitLoader(app);
   server.listen(config.port, () => console.log(`👂 server started on port ${config.port} on (${config.env}) mode`));
 }
 
