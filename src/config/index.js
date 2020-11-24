@@ -49,4 +49,6 @@ export default {
    */
   jwtSecret: process.env.JWT_SECRET,
   algorithms: process.env.ALGORITHM,
+  audience: process.env.AUDIENCE,
+  issued: process.env.ISSUER,
 };
