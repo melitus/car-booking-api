@@ -4,5 +4,13 @@
   "main": "index.js",
   "repository": "https://github.com/melitus/car-booking-api.git",
   "author": "melitus <asmelitus@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  }
 }
