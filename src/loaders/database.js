@@ -2,10 +2,9 @@ import Sequelize from 'sequelize';
 
 import dbConfig from '../config';
 
-import Car from '../api/v1/car';
 import User from '../api/v1/user';
 
-const models = [Car, User];
+const models = [User];
 
 class Database {
   constructor() {
@@ -13,7 +12,7 @@ class Database {
   }
 
   init() {
-    this.connection = new Sequelize(dbConfig.db);
+    this.connection = new Sequelize(dbConfig.db.development);
 
     models
       .map((model) => model.init(this.connection))

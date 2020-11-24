@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class User extends Model {
+class Car extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,11 +9,11 @@ class User extends Model {
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
         },
-        email: {
+        name: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        password: {
+        price: {
           type: Sequelize.STRING,
           allowNull: false,
         },
@@ -33,4 +33,4 @@ class User extends Model {
   }
 }
 
-export default User;
+export default Car;
