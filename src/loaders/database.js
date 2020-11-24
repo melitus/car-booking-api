@@ -11,12 +11,11 @@ class Database {
     this.initDBConnection();
   }
 
-  async initDBConnection() {
+  initDBConnection() {
     this.connection = new Sequelize(dbConfig.db.development);
-
     try {
       console.info('SETUP - Connecting database...');
-      await this.connection.authenticate();
+      this.connection.authenticate();
       console.log('Connection has been established successfully.');
     } catch (error) {
       console.error('Unable to connect to the database:', error);
@@ -24,7 +23,7 @@ class Database {
 
     models
       .map((model) => model.init(this.connection))
-      .map((model) => model.associate && model.associate(this.connection.model));
+      .map((model) => model.associate && model.associate(this.connection.models));
   }
 }
 

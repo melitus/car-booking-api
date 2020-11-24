@@ -29,7 +29,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Car, { foreignKey: 'car_id', onDelete: 'CASCADE' });
+    this.hasMany(models.Car, { foreignKey: 'user_id', onDelete: 'CASCADE', sourceKey: 'id' });
   }
 }
 
