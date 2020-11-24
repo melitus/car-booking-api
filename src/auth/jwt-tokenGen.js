@@ -6,17 +6,19 @@ import { AuthFailureError } from '../error-handler';
 import config from '../config';
 
 export function generateTokenExpiration() {
-  const expiresIn = moment().add(config.jwt.jwtExpirationInterval, 'minutes').unix();
+  const expiresIn = moment().add(config.jwtExpirationInterval, 'minutes').unix();
 
   return expiresIn;
 }
+console.log({ algorithm: config.algorithms });
+
 function readAccessTokenKey() {
   return config.jwtSecret;
 }
 async function encodeAccessToken(payload) {
   const cert = readAccessTokenKey();
   if (!cert) throw new AuthFailureError(401, 'Token generation failure');
-  return promisify(sign)({ ...payload }, cert, { algorithm: config.jwt.algorithm });
+  return promisify(sign)({ ...payload }, cert, { algorithm: config.algorithms });
 }
 
 const prepareTokenPayload = (user) => {

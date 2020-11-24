@@ -14,7 +14,7 @@ const register = async (req, res) => {
       res.status(httpStatus.CREATED).json({ token: newUserAccessToken });
     }
   } catch (error) {
-    res.status(httpStatus.UNAUTHORIZED).json({ message: 'Error Creating User' });
+    res.status(httpStatus.UNAUTHORIZED).json({ message: 'Error Creating User', Error: error });
   }
 };
 
@@ -24,6 +24,8 @@ const login = async (req, res) => {
     const response = await UserService.loginUser(inputData);
     res.status(httpStatus.OK).json({ token: response });
   } catch (error) {
+    console.trace(error);
+
     res.status(httpStatus.UNAUTHORIZED).json({ message: 'Error login User' });
   }
 };

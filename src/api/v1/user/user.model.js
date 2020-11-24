@@ -11,6 +11,8 @@ class User extends Model {
         },
         email: {
           type: Sequelize.STRING,
+          unique: true,
+          isLowerCase: true,
           allowNull: false,
         },
         password: {
