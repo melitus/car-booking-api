@@ -3,7 +3,7 @@ import { generateAccessTokens, passwordMatchesFn, generatePasswordHashFn } from 
 
 const checkEmailExist = async (email) => {
   console.log({ email });
-  const user = await User.findOne({ where: { email }, attributes: ['id', 'email'], raw: false });
+  const user = await User.findOne({ where: { email }, raw: false });
   console.log({ user });
 
   return user;
@@ -31,4 +31,9 @@ const loginUser = async (inputData) => {
   return accessToken;
 };
 
-export default { loginUser, registerUser, checkEmailExist };
+const findAllUser = async () => {
+  const foundUsers = await User.findAll();
+  return foundUsers;
+};
+
+export default { loginUser, findAllUser, registerUser, checkEmailExist };
