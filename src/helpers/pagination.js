@@ -1,13 +1,15 @@
 /* eslint-disable import/prefer-default-export */
 export const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: tutorials } = data;
+  console.log({ data, page, limit });
+  const { count: totalCars, rows: cars } = data;
   const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(totalItems / limit);
+  const totalPages = Math.ceil(totalCars / limit);
 
-  return { totalItems, tutorials, totalPages, currentPage };
+  return { totalCars, cars, totalPages, currentPage };
 };
 
 export const getPagination = (page, size) => {
+  console.log({ page, size });
   const limit = size ? +size : 3;
   const offset = page ? page * limit : 0;
 

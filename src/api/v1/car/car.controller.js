@@ -8,6 +8,7 @@ const getAllCars = async (req, res) => {
     const response = await CarService.getAllCars(inputData);
     res.status(httpStatus.OK).json({ success: true, message: 'All cars fetched successfully', data: response });
   } catch (error) {
+    console.trace(error);
     res.status(httpStatus.UNAUTHORIZED).json({ success: false, message: 'Error occurred fetching all cars' });
   }
 };

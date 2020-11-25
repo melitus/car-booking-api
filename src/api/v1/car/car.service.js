@@ -6,13 +6,21 @@ import Car from './car.model';
 const getAllCars = async (params) => {
   const pageNumber = Math.floor(Number(params.pagenumber));
   const pageSize = Math.floor(Number(params.pagesize));
-  const { limit, offset } = getPagination(pageNumber, pageSize);
-  const searchQuery = { where: limit, offset };
+  const foundCars = await Car.findAll();
+  const totalCarsCount = await foundCars.length;
 
-  const foundCars = await Car.findAndCountAll(searchQuery);
-  const response = getPagingData(foundCars, pageNumber, limit);
+  const finalResult = {
+    cars: foundCars,
+    carCounts: foundCars.length,
+    currentPage: pageNumber,
+    hasNextPage: pageSize * pageNumber < totalCarsCount,
+    hasPreviousPage: pageNumber > 1,
+    nextPage: pageNumber + 1,
+    previousPage: pageNumber - 1,
+    lastPage: Math.ceil(totalCarsCount / pageSize),
+  };
 
-  return response;
+  return finalResult;
 };
 
 const findPreviousBookingByUser = async (params, userId) => {
@@ -20,7 +28,7 @@ const findPreviousBookingByUser = async (params, userId) => {
   const pageSize = Math.floor(Number(params.pagesize));
   const condition = userId ? { user_id: { [Op.like]: `%${userId}%` } } : null;
   const { limit, offset } = getPagination(pageNumber, pageSize);
-  const searchQuery = { where: condition, limit, offset };
+  const searchQuery = { where: { condition }, limit, offset };
 
   const previousBookingByUser = await Car.findAll(searchQuery);
   const response = getPagingData(previousBookingByUser, pageNumber, limit);
@@ -29,6 +37,7 @@ const findPreviousBookingByUser = async (params, userId) => {
 };
 
 const bookACar = async (inputData) => {
+  console.log({ inputData });
   const bookingPayload = {
     name: inputData.name,
     price: inputData.price,

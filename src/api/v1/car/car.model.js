@@ -17,7 +17,7 @@ class Car extends Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        user_id: Sequelize.INTEGER,
+        user_id: Sequelize.UUID,
       },
       {
         sequelize,

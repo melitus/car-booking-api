@@ -10,7 +10,8 @@ const jwtOptions = {
 };
 
 // This verifies that the token sent by the user is valid
-const jwtVerify = async (payload, done) => {
+const getJWTStrategy = async (payload, done) => {
+  console.log({ payload });
   try {
     const user = await User.findOne({ where: { id: payload.sub }, raw: false });
     if (user) {
@@ -22,7 +23,7 @@ const jwtVerify = async (payload, done) => {
   }
 };
 
-const jwt = new JWTStrategy(jwtOptions, jwtVerify);
+const jwt = new JWTStrategy(jwtOptions, getJWTStrategy);
 
 export default {
   jwt,

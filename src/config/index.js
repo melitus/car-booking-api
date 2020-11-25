@@ -52,4 +52,5 @@ export default {
   algorithms: process.env.ALGORITHM,
   audience: process.env.AUDIENCE,
   issued: process.env.ISSUER,
+  jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
 };
