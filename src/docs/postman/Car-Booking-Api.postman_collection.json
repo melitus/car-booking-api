@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "230e3610-2367-436d-a30b-98517831fb42",
+		"name": "Car-Booking-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"santino@gmail.com\",\n  \"password\": \"santino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/v1/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"register"
+							]
+						},
+						"description": "This is an endpoint to register a user on the car booking site"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"santino@gmail.com\",\n  \"password\": \"santino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"login"
+							]
+						},
+						"description": "This is an endpoint to login a user"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"mezedez\",\n  \"price\": \"23\",\n  \"user_id\": \"3a6bf815-5dbc-48ed-a48a-9d4a5cb81c34\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/v1/api/booking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"api",
+								"booking"
+							]
+						},
+						"description": "This is the endpoint to book a car"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCars",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzdXBwb3J0QGNhcmJvb2tpbmcuaW8iLCJpc3MiOiJjYXJib29raW5nIiwiaWF0IjoxNjA2MzIyOTU4LCJleHAiOjE2MDYzMjY1NTgsInN1YiI6ImI0MjgzNTM4LWY3OTctNDgzNy04MmVmLTQxZjc0NzUzYjNlYiJ9.0MAcCz7-EJDc7c7buKg6bJpnp8nLvjtG1ff7WVA--Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/v1/api/booking?pagesize=10&pagenumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"api",
+								"booking"
+							],
+							"query": [
+								{
+									"key": "pagesize",
+									"value": "10"
+								},
+								{
+									"key": "pagenumber",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This endpoints is used to get all cars on the platform. The response object must be paginated"
+					},
+					"response": []
+				},
+				{
+					"name": "getPreviousBookingByUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzdXBwb3J0QGNhcmJvb2tpbmcuaW8iLCJpc3MiOiJjYXJib29raW5nIiwiaWF0IjoxNjA2MzIyOTU4LCJleHAiOjE2MDYzMjY1NTgsInN1YiI6ImI0MjgzNTM4LWY3OTctNDgzNy04MmVmLTQxZjc0NzUzYjNlYiJ9.0MAcCz7-EJDc7c7buKg6bJpnp8nLvjtG1ff7WVA--Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/v1/api/booking/f896027b-3901-4cf7-8ebd-1ca742cd9b05/previous?pagesize=10&pagenumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"api",
+								"booking",
+								"f896027b-3901-4cf7-8ebd-1ca742cd9b05",
+								"previous"
+							],
+							"query": [
+								{
+									"key": "pagesize",
+									"value": "10"
+								},
+								{
+									"key": "pagenumber",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This endpoints is used to get previous booking by user"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
