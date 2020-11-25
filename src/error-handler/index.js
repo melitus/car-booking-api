@@ -47,3 +47,28 @@ export class AuthFailureError extends CarBookingStackError {
     this.title = title;
   }
 }
+
+export class NotFoundError extends CarBookingStackError {
+  constructor(
+    status = httpStatus.NOT_FOUND,
+    title = 'Resource error',
+    message = 'ResourceNotFoundError: The API endpoint requested does not exist',
+  ) {
+    super(message);
+    this.status = status;
+    this.title = title;
+  }
+}
+
+export const errorHandler = (err, req, res, next) => {
+  const response = {
+    code: err.status,
+    message: err.message || httpStatus[err.status],
+    errors: err.errors,
+    stack: err.stack,
+  };
+  res.status(err.status);
+  res.json(response);
+  res.end();
+  next();
+};
