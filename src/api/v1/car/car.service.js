@@ -27,7 +27,18 @@ const findPreviousBookingByUser = async (params, userId) => {
   return response;
 };
 
+const bookACar = async (inputData) => {
+  const bookingPayload = {
+    name: inputData.name,
+    price: inputData.price,
+    user_id: inputData.user_id,
+  };
+  const newBooking = await Car.create(bookingPayload);
+  return newBooking;
+};
+
 export default {
   getAllCars,
   findPreviousBookingByUser,
+  bookACar,
 };
