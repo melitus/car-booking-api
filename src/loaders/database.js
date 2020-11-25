@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import dbConfig from '../config';
 import User from '../api/v1/user/user.model';
 import Car from '../api/v1/car/car.model';
+import logger from './logger';
 
 const models = [User, Car];
 
@@ -14,11 +15,11 @@ class Database {
   initDBConnection() {
     this.connection = new Sequelize(dbConfig.db.development);
     try {
-      console.info('SETUP - Connecting database...');
+      logger.info('SETUP - Connecting database...');
       this.connection.authenticate();
-      console.log('Connection has been established successfully.');
+      logger.info('Connection has been established successfully.');
     } catch (error) {
-      console.error('Unable to connect to the database:', error);
+      logger.error('Unable to connect to the database:', error);
     }
 
     models

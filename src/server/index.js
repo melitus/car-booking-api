@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 export function startServer() {
   appInitLoader(app);
-  server.listen(config.port, () => logger.log(`👂 server started on port ${config.port} on (${config.env}) mode`));
+  server.listen(config.port, () => logger.info(`👂 server started on port ${config.port} on (${config.env}) mode`));
 }
 
 startServer();
