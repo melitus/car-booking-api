@@ -6,7 +6,7 @@ import carRoutes from '../v1/car';
 const apiRouter = Router();
 
 apiRouter.get('/', (req, res) => {
-  res.status(200).json('Car booking api is live!');
+  res.status(200).json({ success: true, message: 'Car booking api is live!' });
 });
 
 apiRouter.use('/user', userRoutes);
