@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { genericErrorHandler, NotFoundError, errorHandler } from '../error-handler';
+import { NotFoundError, errorHandler } from '../error-handler';
 
 export function initializeErrorHandling(app) {
   // catch 404 and forward to error handler

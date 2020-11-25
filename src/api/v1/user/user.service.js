@@ -2,9 +2,7 @@ import User from './user.model';
 import { generateAccessTokens, passwordMatchesFn, generatePasswordHashFn } from '../../../auth';
 
 const checkEmailExist = async (email) => {
-  console.log({ email });
   const user = await User.findOne({ where: { email }, raw: false });
-  console.log({ user });
 
   return user;
 };
@@ -12,12 +10,10 @@ const checkEmailExist = async (email) => {
 const registerUser = async (inputData) => {
   const { email, password } = inputData;
   const hash = await generatePasswordHashFn(password);
-  console.log({ hash, inputData });
   const newUser = await User.create({
     email,
     password: hash,
   });
-  console.log({ newUser });
   const accessToken = await generateAccessTokens(newUser);
   return accessToken;
 };
@@ -31,9 +27,4 @@ const loginUser = async (inputData) => {
   return accessToken;
 };
 
-const findAllUser = async () => {
-  const foundUsers = await User.findAll();
-  return foundUsers;
-};
-
-export default { loginUser, findAllUser, registerUser, checkEmailExist };
+export default { loginUser, registerUser, checkEmailExist };

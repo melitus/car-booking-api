@@ -11,7 +11,6 @@ const jwtOptions = {
 
 // This verifies that the token sent by the user is valid
 const getJWTStrategy = async (payload, done) => {
-  console.log({ payload });
   try {
     const user = await User.findOne({ where: { id: payload.sub }, raw: false });
     if (user) {

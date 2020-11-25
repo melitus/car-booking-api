@@ -21,8 +21,6 @@ const getAllPreviousBookingByUser = async (req, res) => {
       .status(httpStatus.OK)
       .json({ success: true, message: 'All previous booking fetched successfully', data: response });
   } catch (error) {
-    console.trace(error);
-
     res
       .status(httpStatus.UNAUTHORIZED)
       .json({ success: false, message: 'Error occurred fetching all previous booking by user' });

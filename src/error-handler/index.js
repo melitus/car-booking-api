@@ -2,23 +2,6 @@
 /* eslint-disable max-classes-per-file */
 import httpStatus from 'http-status';
 
-// /**
-//  * @extends Error
-//  */
-// export class CarBookingStackError extends Error {
-//   constructor({ message, errors, title, status, isPublic, stack }) {
-//     super(message);
-//     this.name = this.constructor.name;
-//     this.message = message;
-//     this.errors = errors;
-//     this.status = status;
-//     this.isPublic = isPublic;
-//     this.isOperational = true; // This is required since bluebird 4 doesn't append it anymore.
-//     this.stack = stack; // Error.captureStackTrace(this, this.constructor.name);
-//     this.title = title;
-//   }
-// }
-
 export class CarBookingStackError extends Error {
   constructor(message, ...args) {
     super(...args);
@@ -75,25 +58,6 @@ export class NotFoundError extends CarBookingStackError {
   }
 }
 
-// Generic error response middleware for internal server errors.
-export function genericErrorHandler(err, req, res, next) {
-  console.log({ err });
-  const errCode = err.status || err.code || 500;
-  let errorMsg = '';
-
-  if (Array.isArray(err.error)) {
-    errorMsg = err.error.map((e) => `${e.param}: ${e.msg}`).toString();
-  } else {
-    errorMsg = err.error ? `${err.error.message} ${err.error.detail || ''}` : err.message;
-  }
-
-  res.status(errCode).json({
-    success: false,
-    code: errCode,
-    message: errorMsg,
-  });
-}
-
 /**
  * Create an Error Object
  * @param {Array} or {object} errors - an instance or array of instances of AppError
@@ -101,7 +65,6 @@ export function genericErrorHandler(err, req, res, next) {
  */
 function formatError(errors) {
   let errorFormat;
-  console.log({ errors });
   if (Array.isArray(errors)) {
     const formattedErrors = errors.map((error) => {
       const formattedError = {
@@ -138,7 +101,6 @@ export async function errorHandler(error, request, response, next) {
 
   /* if we get an unhandled error, we want to log to console and turn it into an API error */
   if (!isTrustedError(err)) {
-    console.error(err);
     err = new AppError(
       httpStatus.INTERNAL_SERVER_ERROR,
       error.name || 'Internal Server Error',

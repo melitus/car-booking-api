@@ -10,7 +10,6 @@ export function generateTokenExpiration() {
 
   return expiresIn;
 }
-console.log({ algorithm: config.algorithms });
 
 function readAccessTokenKey() {
   return config.jwtSecret;

@@ -31,25 +31,11 @@ const login = async (req, res) => {
       res.status(httpStatus.OK).json({ success: true, message: 'User login successsfuly', data: response });
     }
   } catch (error) {
-    console.trace(error);
-
     res.status(httpStatus.UNAUTHORIZED).json({ success: false, message: 'Error login User' });
   }
 };
 
-const finduser = async (req, res) => {
-  const inputData = req.body;
-  try {
-    const response = await UserService.findAllUser(inputData);
-    res.status(httpStatus.OK).json({ success: true, data: response });
-  } catch (error) {
-    console.trace(error);
-
-    res.status(httpStatus.UNAUTHORIZED).json({ success: false, message: 'Error login User' });
-  }
-};
 export default {
   register,
   login,
-  finduser,
 };
