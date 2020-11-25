@@ -31,6 +31,7 @@ const login = async (req, res) => {
       res.status(httpStatus.OK).json({ success: true, message: 'User login successsfuly', data: response });
     }
   } catch (error) {
+    console.trace(error);
     res.status(httpStatus.UNAUTHORIZED).json({ success: false, message: 'Error login User' });
   }
 };

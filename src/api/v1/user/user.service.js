@@ -16,7 +16,8 @@ const registerUser = async (inputData) => {
   });
   const accessToken = await generateAccessTokens(newUser);
   const response = {
-    newUser,
+    _id: newUser.id,
+    email: newUser.email,
     accessToken,
   };
   return response;
@@ -28,7 +29,8 @@ const loginUser = async (inputData) => {
   const accessToken = await generateAccessTokens(user);
   await passwordMatchesFn(password, user.password);
   const response = {
-    user,
+    _id: user.id,
+    email: user.email,
     accessToken,
   };
   return response;
