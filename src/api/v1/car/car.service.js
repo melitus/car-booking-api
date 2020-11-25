@@ -1,5 +1,3 @@
-import { Op } from 'sequelize';
-
 import { getPagingData } from '../../../helpers/pagination';
 import Car from './car.model';
 
@@ -17,18 +15,17 @@ const getAllCars = async (params) => {
 const findPreviousBookingByUser = async (params, userId) => {
   const pageNumber = Math.floor(Number(params.pagenumber));
   const pageSize = Math.floor(Number(params.pagesize));
-  const condition = userId ? { user_id: { [Op.like]: `%${userId}%` } } : null;
-  const { limit, offset } = getPagination(pageNumber, pageSize);
-  const searchQuery = { where: { condition }, limit, offset };
+  const searchQuery = { where: { user_id: userId } };
 
   const previousBookingByUser = await Car.findAll(searchQuery);
-  const response = getPagingData(previousBookingByUser, pageNumber, limit);
+  const totalPreviousCarsCount = await previousBookingByUser.length;
 
-  return response;
+  const finalResult = getPagingData(previousBookingByUser, totalPreviousCarsCount, pageNumber, pageSize);
+
+  return finalResult;
 };
 
 const bookACar = async (inputData) => {
-  console.log({ inputData });
   const bookingPayload = {
     name: inputData.name,
     price: inputData.price,
