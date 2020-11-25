@@ -5,8 +5,6 @@ import UserController from './user.controller';
 
 const userRouter = Router();
 
-userRouter.route('').get(UserController.finduser);
-
 userRouter.route('/login').post(UserController.login);
 userRouter.route('/register').post(UserController.register);
 

@@ -8,6 +8,7 @@ const getAllCars = async (params) => {
   const pageSize = Math.floor(Number(params.pagesize));
   const { limit, offset } = getPagination(pageNumber, pageSize);
   const searchQuery = { where: limit, offset };
+
   const foundCars = await Car.findAndCountAll(searchQuery);
   const response = getPagingData(foundCars, pageNumber, limit);
 
@@ -19,8 +20,8 @@ const findPreviousBookingByUser = async (params, userId) => {
   const pageSize = Math.floor(Number(params.pagesize));
   const condition = userId ? { user_id: { [Op.like]: `%${userId}%` } } : null;
   const { limit, offset } = getPagination(pageNumber, pageSize);
-
   const searchQuery = { where: condition, limit, offset };
+
   const previousBookingByUser = await Car.findAll(searchQuery);
   const response = getPagingData(previousBookingByUser, pageNumber, limit);
 
