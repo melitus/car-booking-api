@@ -59,3 +59,15 @@ To use postman, go to the project doc folder and import the docs file into your 
 
 
 ### <a href="https://car-booking-backend.herokuapp.com/v1/api">LIVE DEMO</a>
+
+## User Endpoint
+ - Login - `https://car-booking-backend.herokuapp.com/v1/api/user/login`
+ - Register - `https://car-booking-backend.herokuapp.com/v1/api/user/register`
+
+## Car Endpoints
+
+- Get all cars - `https://car-booking-backend.herokuapp.com/v1/api/booking?pagesize=10&pagenumber=1`
+
+- Book a car - `https://car-booking-backend.herokuapp.com/v1/api/booking`
+
+- Get previous booking filtered by user - `https://car-booking-backend.herokuapp.com/v1/api/booking/24d551b9-6845-443a-ba9e-de18dd0b4fec/previous?pagesize=10&pagenumber=1`
