@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 
-import { getPagination, getPagingData } from '../../../helpers/pagination';
+import { getPagingData } from '../../../helpers/pagination';
 import Car from './car.model';
 
 const getAllCars = async (params) => {
@@ -9,16 +9,7 @@ const getAllCars = async (params) => {
   const foundCars = await Car.findAll();
   const totalCarsCount = await foundCars.length;
 
-  const finalResult = {
-    cars: foundCars,
-    carCounts: foundCars.length,
-    currentPage: pageNumber,
-    hasNextPage: pageSize * pageNumber < totalCarsCount,
-    hasPreviousPage: pageNumber > 1,
-    nextPage: pageNumber + 1,
-    previousPage: pageNumber - 1,
-    lastPage: Math.ceil(totalCarsCount / pageSize),
-  };
+  const finalResult = getPagingData(foundCars, totalCarsCount, pageNumber, pageSize);
 
   return finalResult;
 };
