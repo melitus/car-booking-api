@@ -58,4 +58,4 @@ I used postman to test the api.
 To use postman, go to the project doc folder and import the docs file into your postman client to ease the testing
 
 
-### <a href="https://melitus-aroh.herokuapp.com/">LIVE DEMO</a>
+### <a href="https://car-booking-backend.herokuapp.com/v1/api">LIVE DEMO</a>

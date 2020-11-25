@@ -15,7 +15,11 @@ const registerUser = async (inputData) => {
     password: hash,
   });
   const accessToken = await generateAccessTokens(newUser);
-  return accessToken;
+  const response = {
+    newUser,
+    accessToken,
+  };
+  return response;
 };
 
 const loginUser = async (inputData) => {
@@ -23,8 +27,11 @@ const loginUser = async (inputData) => {
   const user = await User.findOne({ where: { email }, raw: false });
   const accessToken = await generateAccessTokens(user);
   await passwordMatchesFn(password, user.password);
-
-  return accessToken;
+  const response = {
+    user,
+    accessToken,
+  };
+  return response;
 };
 
 export default { loginUser, registerUser, checkEmailExist };
