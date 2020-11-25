@@ -35,25 +35,23 @@ export class CarBookingStackError extends Error {
   }
 }
 
-// Class representing an API error.
-
+/** Class representing an API Error Response with a related HTTP Status Code * */
 export class AppError extends CarBookingStackError {
-  constructor({
-    errors,
-    stack,
+  /**
+   * Create an Error Object
+   * @param {number} status - The HTTP Status Code (e.g. 404)
+   * @param {string} title - The title corresponding to the Status Code (e.g. Bad Request)
+   * @param {string} message - Specific information about what caused the error
+   */
+  constructor(
+    status = httpStatus.INTERNAL_SERVER_ERROR,
     title = 'Internal Server Error',
     message = 'An unknown server error occurred.',
-    status = httpStatus.INTERNAL_SERVER_ERROR,
-    isPublic = false,
-  }) {
-    super({
-      message,
-      errors,
-      status,
-      isPublic,
-      stack,
-      title,
-    });
+  ) {
+    // super(status, title, message);
+    super(message);
+    this.status = status;
+    this.title = title;
   }
 }
 
@@ -128,12 +126,6 @@ function formatError(errors) {
   return errorFormat;
 }
 
-async function handleError(err) {
-  await console.error('Error message from the centralized error-handling component', err);
-  // await sendMailToAdminIfCritical(err);
-  // await sendEventsToSentry();
-}
-
 function isTrustedError(error) {
   if (error instanceof CarBookingStackError) {
     return error.isOperational;
@@ -152,7 +144,6 @@ export async function errorHandler(error, request, response, next) {
       error.name || 'Internal Server Error',
       error.message || 'An unknown server error occurred',
     );
-    await handleError(err);
   }
   const processedErrors = formatError(err);
   response.status(processedErrors.errors[0].status || 500).json(processedErrors);
