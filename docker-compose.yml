@@ -1,0 +1,42 @@
+version: "3"
+services:
+  es:
+    image: elasticsearch:6.4.1
+    ports:
+      - "9200:9200"
+    environment:
+      - ES_JAVA_OPTS= -Xms256m -Xmx256m
+  server:
+    image: server
+    ports:
+      - "4000:4000"
+    volumes:
+      - /root/carbooking.com/server/images:/usr/app/images
+    depends_on:
+      - es
+  web:
+    image: web
+    ports:
+      - "3000:3000"
+  proxy:
+    image: abiosoft/caddy:no-stats
+    volumes:
+      - /root/carbooking.com/Caddyfile:/etc/Caddyfile
+      - /root/.caddy:/root/.caddy
+      - /root/logs:/etc/logs
+      - /root/goaccess/.html:/site/goaccess
+    ports:
+      - "80:80"
+      - "443:443"
+      - "7890:7890"
+    depends_on:
+      - web
+      - server
+  goaccess:
+    image: allinurl/goaccess
+    volumes:
+      - /root/carbooking.com/goaccess/data/:/srv/data
+      - /root/goaccess/.html:/srv/report
+      - /root/logs:/srv/logs
+    depends_on:
+      - proxy
