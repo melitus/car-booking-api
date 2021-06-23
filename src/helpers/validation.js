@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-use-before-define */
 const defaultServerResponse = {
   status: 422,
